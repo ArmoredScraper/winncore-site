@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WinnCore — kernel-safe control plane</title>
+<meta name="description" content="WinnCore hardens Linux endpoints with a kernel-enforced tool allowlist and rate-limited control plane.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="WinnCore — kernel-safe control plane">
+<meta property="og:description" content="Wrong hash? Denied. Correct hash? Green. DKMS + Secure Boot path.">
+<meta property="og:url" content="https://www.winncore.com/">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{--bg:#0b0b10;--fg:#e8e8ef;--mut:#a3a3b2;--acc:#6b7cff;--ok:#22c55e;--bad:#ef4444}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--fg);background:
+radial-gradient(1200px 600px at 80% -20%,#243 0%,rgba(0,0,0,0) 60%),
+radial-gradient(800px 400px at 10% -10%,#112 0%,rgba(0,0,0,0) 55%),var(--bg)}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:980px;margin:auto;padding:56px 20px}
+.hero{display:grid;gap:14px;margin:36px 0}
+h1{font-size:clamp(28px,4.8vw,44px);line-height:1.05;margin:0}
+p.lead{font-size:clamp(16px,2.4vw,20px);color:var(--mut);margin:6px 0 0}
+.cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 16px;border-radius:10px;background:var(--acc);color:white;font-weight:600}
+.btn.alt{background:#1f2335;border:1px solid #2d3350}
+.card{border:1px solid #22263a;background:#0f1222aa;border-radius:14px;padding:16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:22px}
+pre{margin:0;background:#0a0d1a;border:1px solid #1a1f33;border-radius:10px;padding:14px;overflow:auto}
+footer{color:var(--mut);margin-top:40px;font-size:14px}
+.bad{color:var(--bad);font-weight:700}.ok{color:var(--ok);font-weight:700}
+.small{font-size:13px;color:var(--mut)}
+</style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>WinnCore</h1>
+      <p class="lead">Kernel-enforced tool allowlist and rate-limited control plane. Wrong hash → <span class="bad">denied</span>. Correct hash → <span class="ok">green</span>.</p>
+      <div class="cta">
+        <a class="btn" href="mailto:contact@winncore.com?subject=WinnCore%20intro">Book 15-min intro</a>
+        <a class="btn alt" href="https://github.com/ArmoredScraper/gunvm" rel="nofollow">View OSS core</a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card"><h3>Secure by default</h3><p>Hash-pinned binaries in <code>/opt/gunvm/tools</code>. Deny by default. Journal audit lines for every decision.</p></div>
+      <div class="card"><h3>Deployable today</h3><p>DKMS builds for LTS kernels. Secure Boot signing path. Single-file CLI.</p></div>
+      <div class="card"><h3>Low blast radius</h3><p>Ring buffer + rate limits; no exec from unknown paths; minimal kernel surface.</p></div>
+    </section>
+
+    <section class="grid" aria-label="demo">
+      <div class="card">
+        <strong>Deny demo</strong>
+        <pre><code>$ gctl ping
+kernel: gunvm_secure: deny tool=(null)</code></pre>
+      </div>
+      <div class="card">
+        <strong>Allow demo</strong>
+        <pre><code>$ gctl ping
+nonce_in=... nonce_out=...</code></pre>
+      </div>
+    </section>
+
+    <footer>
+      <p>© <span id="y"></span> WinnCore. All rights reserved.</p>
+      <p class="small">This page collects no cookies. Contact: <a href="mailto:contact@winncore.com">contact@winncore.com</a></p>
+    </footer>
+  </main>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
