@@ -38,6 +38,7 @@ footer{color:var(--mut);margin-top:40px;font-size:14px}
   <main class="container">
     <header class="hero">
       <h1>WinnCore</h1>
+      <p class="small">Security engineering at WinnCore — <strong>Zachary Winn</strong>, Founder</p>
       <p class="lead">Kernel-enforced tool allowlist and rate-limited control plane. Wrong hash → <span class="bad">denied</span>. Correct hash → <span class="ok">green</span>.</p>
       <div class="cta">
         <a class="btn" href="mailto:contact@winncore.com?subject=WinnCore%20intro">Book 15-min intro</a>
@@ -70,5 +71,16 @@ nonce_in=... nonce_out=...</code></pre>
     </footer>
   </main>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <footer style="margin-top:48px;padding:16px 0;border-top:1px solid #222;color:#9aa;font:14px/1.4 system-ui">
+    <div style="max-width:960px;margin:0 auto;padding:0 16px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <span>© <span id="y2"></span> WinnCore · <strong>Zachary Winn</strong>, Founder</span>
+      <nav style="display:flex;gap:14px">
+        <a href="https://www.linkedin.com/in/zachary-w-118067310" style="color:#9aa">LinkedIn</a>
+        <a href="https://github.com/ArmoredScraper" style="color:#9aa">GitHub</a>
+        <a href="mailto:zw@winncore.com" style="color:#9aa">zw@winncore.com</a>
+      </nav>
+    </div>
+    <script>document.getElementById('y2').textContent=new Date().getFullYear()</script>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,3 @@
+Contact: mailto:zw@winncore.com
+Policy: https://www.winncore.com/
+Preferred-Languages: en
