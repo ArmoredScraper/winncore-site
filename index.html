@@ -38,6 +38,21 @@ footer{color:var(--mut);margin-top:40px;font-size:14px}
   <main class="container">
     <header class="hero">
       <h1>WinnCore</h1>
+      <section style="margin-top:20px">
+        <h2 style="margin:0 0 8px">What is WinnCore?</h2>
+        <p>WinnCore is a small security R&amp;D studio. We build minimal, auditable controls that harden Linux endpoints.</p>
+      </section>
+
+      <section style="margin-top:20px">
+        <h3 style="margin:0 0 6px">Kernel-enforced tool allowlist (in plain English)</h3>
+        <p>Only trusted tools (location + exact binary hash) are allowed to talk to the kernel device. Everything else is denied at the kernel boundary—no user-space shims to bypass.</p>
+      </section>
+
+      <section style="margin-top:20px;display:flex;gap:16px;flex-wrap:wrap">
+        <a href="https://github.com/ArmoredScraper" style="padding:10px 14px;border:1px solid #222;border-radius:8px;color:#e8e8ef;text-decoration:none">View OSS work on GitHub →</a>
+        <a href="mailto:zw@winncore.com" style="padding:10px 14px;border:1px solid #222;border-radius:8px;color:#e8e8ef;text-decoration:none">Contact: zw@winncore.com</a>
+        <a href="https://www.linkedin.com/in/zachary-w-118067310" style="padding:10px 14px;border:1px solid #222;border-radius:8px;color:#e8e8ef;text-decoration:none">LinkedIn</a>
+      </section>
       <p class="small">Security engineering at WinnCore — <strong>Zachary Winn</strong>, Founder</p>
       <p class="lead">Kernel-enforced tool allowlist and rate-limited control plane. Wrong hash → <span class="bad">denied</span>. Correct hash → <span class="ok">green</span>.</p>
       <div class="cta">
