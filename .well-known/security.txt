@@ -2,3 +2,4 @@ Contact: mailto:security@winncore.com
 Contact: mailto:abuse@winncore.com
 Policy: https://www.winncore.com/.well-known/security.txt
 Preferred-Languages: en
+Hiring: https://www.winncore.com/

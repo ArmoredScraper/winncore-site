@@ -1,0 +1,11 @@
+/* TEAM */
+Site: https://www.winncore.com
+Company: WinnCore
+Security: security@winncore.com
+General: contact@winncore.com
+
+/* THANKS */
+Built with GitHub Pages.
+
+/* LAST UPDATE */
+2025-08-27 UTC

@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#111"/><text x="50%" y="56%" font-size="34" text-anchor="middle" fill="#66f" font-family="monospace">W</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#g)" d="M32 4l24 10v14c0 13.3-9.1 25.6-24 30C17.1 53.6 8 41.3 8 28V14z"/>
+</svg>
