@@ -1,124 +1,92 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WinnCore — Security-first consulting & engineering</title>
-  <meta name="description" content="WinnCore delivers security-first consulting & engineering: assessments, hardening, incident readiness, and modern email/auth trust signals." />
-  <meta property="og:title" content="WinnCore" />
-  <meta property="og:description" content="Security-first consulting & engineering." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.winncore.com/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%2306f' d='M32 4l24 10v14c0 13.3-9.1 25.6-24 30C17.1 53.6 8 41.3 8 28V14z'/%3E%3C/svg%3E">
-  <style>
-    :root{
-      --bg: #0b0f14; --card:#101720; --muted:#aab4c0; --text:#e8eef6; --brand:#3b82f6; --brand-2:#22d3ee;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font:16px/1.6 Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;
-      color:var(--text);
-      background: radial-gradient(1200px 600px at 10% -20%,#122033 0%,#0b0f14 50%), 
-                  radial-gradient(1000px 500px at 110% 10%,#0b1a2a 0%,#0b0f14 60%);
-    }
-    a{color:var(--brand); text-decoration:none}
-    a:hover{opacity:.9}
-    .wrap{max-width:1100px; margin:0 auto; padding:40px 20px}
-    header{display:flex; align-items:center; justify-content:space-between; gap:16px}
-    .logo{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px}
-    .logo-badge{width:28px; height:28px; border-radius:8px; background:
-      conic-gradient(from 210deg, var(--brand), var(--brand-2)); box-shadow:0 0 20px #1f6fff55}
-    .nav a{margin-left:18px; color:var(--muted)}
-    .hero{display:grid; grid-template-columns:1.15fr .85fr; gap:32px; align-items:center; padding:60px 0}
-    .h1{font-size:44px; line-height:1.15; margin:0 0 12px}
-    .lead{color:#c7d2df; margin:0 0 22px}
-    .cta{display:flex; gap:14px; flex-wrap:wrap}
-    .btn{padding:12px 16px; border-radius:12px; font-weight:600; border:1px solid #2a3645; background:#142132}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#041018; border:0}
-    .card{
-      background:linear-gradient(180deg, rgba(20,28,40,.7), rgba(16,23,32,.7));
-      border:1px solid #1e2a3a; border-radius:18px; padding:20px; box-shadow:0 10px 30px #00000040
-    }
-    .grid{display:grid; gap:18px}
-    .grid.features{grid-template-columns:repeat(3,1fr)}
-    .tag{display:inline-block; padding:4px 10px; border:1px solid #2a3645; border-radius:999px; color:var(--muted); font-size:12px}
-    .muted{color:var(--muted)}
-    footer{padding:40px 0; color:#98a6b6; font-size:14px}
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .grid.features{grid-template-columns:1fr}
-      .h1{font-size:34px}
-    }
-    /* subtle divider */
-    .line{height:1px; background:linear-gradient(90deg, transparent, #1e2a3a, transparent); margin:34px 0}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WinnCore — Kernel allowlist & rate-limited control plane</title>
+<meta name="description" content="Kernel-enforced tool allowlist and rate-limited control plane. Wrong hash → denied. Correct hash → green." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%2306f' d='M32 4l24 10v14c0 13.3-9.1 25.6-24 30C17.1 53.6 8 41.3 8 28V14z'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b0f14;--panel:#0f1622;--edge:#1c293a;--muted:#a9b6c6;--text:#e7eef7;--brand:#3b82f6;--brand2:#22d3ee;--ok:#17c964;--deny:#ff5b5b}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font:16px/1.6 Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;color:var(--text);
+ background:radial-gradient(1200px 600px at 15% -10%,#122033 0%,var(--bg) 55%),radial-gradient(900px 500px at 110% 0%,#0b1a2a 0%,var(--bg) 60%);}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 20px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;gap:10px;align-items:center;font-weight:700}
+.badge{width:26px;height:26px;border-radius:8px;background:conic-gradient(from 210deg,var(--brand),var(--brand2));box-shadow:0 0 24px #1e60ff55}
+a{color:var(--brand);text-decoration:none}
+.hero{padding:56px 0;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+h1{margin:6px 0 4px;font-size:44px;line-height:1.12}
+.sub{color:#c6cfda;margin:0 0 18px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:12px 16px;border-radius:12px;border:1px solid var(--edge);background:#132131;font-weight:600}
+.btn.primary{border:0;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#031017}
+.grid{display:grid;gap:18px}
+.cards{grid-template-columns:repeat(3,1fr)}
+.card{background:linear-gradient(180deg,#111b28aa,#0f1622aa);border:1px solid var(--edge);border-radius:16px;padding:18px;box-shadow:0 10px 30px #00000040}
+.kdemo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+.code{background:#0d1420;border:1px solid var(--edge);border-radius:14px;padding:14px;font:14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;color:#d7e2f2}
+.code .deny{color:var(--deny);font-weight:700}
+.code .ok{color:var(--ok);font-weight:700}
+.muted{color:var(--muted)}
+hr.line{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--edge),transparent);margin:28px 0}
+footer{padding:38px 0;color:#9fb0c3;font-size:14px}
+@media (max-width:900px){.hero{grid-template-columns:1fr} h1{font-size:34px} .cards,.kdemo{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="logo"><div class="logo-badge"></div><div>WinnCore</div></div>
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-        <a href="/.well-known/security.txt">security.txt</a>
-      </nav>
+      <div class="logo"><div class="badge"></div><div>WinnCore</div></div>
+      <nav><a href="/.well-known/security.txt">security.txt</a></nav>
     </header>
 
     <section class="hero">
       <div>
-        <div class="tag">Security-first consulting & engineering</div>
-        <h1 class="h1">Ship with confidence.<br>Harden what matters.</h1>
-        <p class="lead">Assessments, hardening, incident readiness, and email/auth trust
-          signals (SPF, DKIM, DMARC, MTA-STS, TLS-RPT, BIMI) built the right way.</p>
-        <div class="cta">
-          <a class="btn primary" href="mailto:security@winncore.com">Start a conversation</a>
-          <a class="btn" href="mailto:engineering@winncore.com">Talk to engineering</a>
+        <h1>WinnCore</h1>
+        <p class="sub">Kernel-enforced tool allowlist and rate-limited control plane. Wrong hash → <span class="deny">denied</span>. Correct hash → <span class="ok">green</span>.</p>
+        <div class="btns">
+          <a class="btn primary" href="mailto:contact@winncore.com?subject=Intro%20call%20(15min)">Book 15-min intro</a>
+          <a class="btn" href="https://github.com/ArmoredScraper" target="_blank" rel="noopener">View OSS core</a>
+        </div>
+
+        <div class="kdemo">
+          <div class="code">
+            <strong>Deny demo</strong><br/>
+$ get1 ping<br/>
+kernel: gunc: verify: <span class="deny">deny</span> tool=&lt;null&gt;<br/>
+# audit: hash mismatch; journal out
+          </div>
+          <div class="code">
+            <strong>Allow demo</strong><br/>
+$ get1 ping --nonce _jn... --nonce_path ...<br/>
+kernel: gunc: verify: <span class="ok">ok</span> sha256=…<br/>
+# rate-limit: 5/s; backoff on burst
+          </div>
         </div>
       </div>
-      <div class="grid">
+
+      <div class="grid cards">
         <div class="card">
-          <strong>Deliverability & Trust</strong>
-          <p class="muted">SPF/DKIM/DMARC with sane defaults, warm-up plans, and monitoring hooks.</p>
+          <strong>Secure by default</strong>
+          <p class="muted">Hash-pinned binaries in <code>/opt/gunc/tools</code>. Deny by default. Journal audit lines for every decision.</p>
         </div>
         <div class="card">
-          <strong>Server Security</strong>
-          <p class="muted">Baseline hardening, TLS, headers, logging, and pragmatic incident readiness.</p>
+          <strong>Deployable today</strong>
+          <p class="muted">DKMS builds for LTS kernels, Secure Boot signing path, single-file CLI, no vendor lock-in.</p>
         </div>
         <div class="card">
-          <strong>Lightweight, No Bloat</strong>
-          <p class="muted">Open tools, scripting, and docs you keep—no vendor lock-in.</p>
+          <strong>Low blast radius</strong>
+          <p class="muted">Ring buffer + rate limits; no exec from unknown paths; minimal kernel surface.</p>
         </div>
       </div>
     </section>
 
-    <div id="services" class="line"></div>
-
-    <section class="grid features">
-      <div class="card">
-        <strong>Assessments</strong>
-        <p class="muted">Quick wins + roadmap. We meet you where you are.</p>
-      </div>
-      <div class="card">
-        <strong>Implementation</strong>
-        <p class="muted">We configure, test, and hand off with clear docs.</p>
-      </div>
-      <div class="card">
-        <strong>On-call Assist</strong>
-        <p class="muted">Short retainers for “phone-a-friend” security help.</p>
-      </div>
-    </section>
-
-    <div id="contact" class="line"></div>
-
-    <section class="card">
-      <h2 style="margin:0 0 8px">Contact</h2>
-      <p class="muted">Prefer a shared inbox? Use <a href="mailto:security@winncore.com">security@winncore.com</a>. 
-      For general questions: <a href="mailto:contact@winncore.com">contact@winncore.com</a>.</p>
-    </section>
+    <hr class="line"/>
 
     <footer>
-      © <span id="y"></span> WinnCore • <a href="mailto:abuse@winncore.com">abuse@winncore.com</a>
+      © <span id="y"></span> WinnCore. All rights reserved. • Contact: <a href="mailto:contact@winncore.com">contact@winncore.com</a>
     </footer>
   </div>
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
